@@ -5,6 +5,18 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "command": "cd earthquake-transition && npm run serve",
+            "name": "Run npm serve",
+            "request": "launch",
+            "type": "node-terminal"
+        },
+        {
+            "command": "cd earthquake-transition && npm run build",
+            "name": "Run npm build",
+            "request": "launch",
+            "type": "node-terminal"
+        },
+        {
             "type": "bashdb",
             "request": "launch",
             "name": "Bash-Debug unzip and merge data",
