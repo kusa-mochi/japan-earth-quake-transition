@@ -1,0 +1,10 @@
+version: "3.8"
+services: 
+  app:
+    image: whoatemyapplepie/earthquake-transition:0.1.0
+    command: "bash"
+    ports:
+      - "8080:8080"
+    tty: true
+    volumes: 
+      - ${PWD}:/app
