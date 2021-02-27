@@ -19,7 +19,7 @@
         {
             "type": "bashdb",
             "request": "launch",
-            "name": "Bash-Debug unzip and merge data",
+            "name": "Bash-Debug unzip and merge data for sqlite3",
             "cwd": "${workspaceFolder}/scripts",
             "program": "${workspaceFolder}/scripts/depackage_data.sh",
             "args": []
