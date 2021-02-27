@@ -12,6 +12,10 @@ export default {
   name: "App",
   data() {
     return {
+      eastEnd: 153.986667,
+      northEnd: 45.557778,
+      southEnd: 20.425183,
+      westEnd: 122.9325,
       chartData: [
         {
           datetime: "2011-03-11 14:00:00",
