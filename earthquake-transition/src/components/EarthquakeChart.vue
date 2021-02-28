@@ -19,13 +19,14 @@ export default {
           mode: "markers",
           type: "scatter3d",
           marker: {
-            color: "rgb(23, 190, 207)",
-            size: 5
+            color: "#C66246",
+            size: [2, 5, 10]
           }
         }
       ],
       layout: {
         autosize: true,
+        width: 640,
         height: 480,
         scene: {
           aspectratio: {
@@ -63,8 +64,7 @@ export default {
             zeroline: false
           }
         },
-        title: "3d point clustering",
-        width: 477
+        title: "3d point clustering"
       }
     };
   },
@@ -74,6 +74,11 @@ export default {
     }
   },
   props: {
+    markerColor: {
+      default: "#169632",
+      required: false,
+      type: String
+    },
     chartData: {
       default: () => [],
       required: true,
