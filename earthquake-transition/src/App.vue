@@ -4,6 +4,12 @@
     <earthquake-chart
       :chart-data="chartData"
       :marker-color="chartColor"
+      :x-min="westEnd"
+      :x-max="eastEnd"
+      :y-min="southEnd"
+      :y-max="northEnd"
+      :z-min="maxDepth"
+      :z-max="0"
     ></earthquake-chart>
   </div>
 </template>
@@ -19,6 +25,7 @@ export default {
       northEnd: 45.557778,
       southEnd: 20.425183,
       westEnd: 122.9325,
+      maxDepth: -720.0,
       chartColor: "#C66246",
       chartData: [
         {

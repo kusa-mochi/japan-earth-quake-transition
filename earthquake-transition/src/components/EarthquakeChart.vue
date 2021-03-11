@@ -85,6 +85,36 @@ export default {
       default: () => [],
       required: true,
       type: Array
+    },
+    xMin: {
+      default: 0.0,
+      required: false,
+      type: Number
+    },
+    xMax: {
+      default: 1.0,
+      required: false,
+      type: Number
+    },
+    yMin: {
+      default: 0.0,
+      required: false,
+      type: Number
+    },
+    yMax: {
+      default: 1.0,
+      required: false,
+      type: Number
+    },
+    zMin: {
+      default: 0.0,
+      required: false,
+      type: Number
+    },
+    zMax: {
+      default: 1.0,
+      required: false,
+      type: Number
     }
   },
   components: {
