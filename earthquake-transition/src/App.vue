@@ -1,7 +1,16 @@
 <template>
   <div id="app">
     App
-    <earthquake-chart :chart-data="chartData"></earthquake-chart>
+    <earthquake-chart
+      :chart-data="chartData"
+      :marker-color="chartColor"
+      :x-min="westEnd"
+      :x-max="eastEnd"
+      :y-min="southEnd"
+      :y-max="northEnd"
+      :z-min="maxDepth"
+      :z-max="0"
+    ></earthquake-chart>
   </div>
 </template>
 
@@ -12,6 +21,12 @@ export default {
   name: "App",
   data() {
     return {
+      eastEnd: 153.986667,
+      northEnd: 45.557778,
+      southEnd: 20.425183,
+      westEnd: 122.9325,
+      maxDepth: -720.0,
+      chartColor: "#C66246",
       chartData: [
         {
           datetime: "2011-03-11 14:00:00",
