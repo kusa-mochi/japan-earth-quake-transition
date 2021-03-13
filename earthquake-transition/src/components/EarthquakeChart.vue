@@ -11,7 +11,9 @@ export default {
   name: "EarthquakeChart",
   data() {
     const originalMarkerSize = [2.2999999999999998,0,0.80000000000000004,1.7,0.5,0.5,2.6000000000000001,0.69999999999999996,2.2999999999999998,0.29999999999999999,3.6000000000000001,9,0,0,4.7000000000000002,0,0,0,0,0,0,0,0,0,0,6.7999999999999998,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,6.0999999999999996,5.7000000000000002,4.0999999999999996,0,0,0,0,0,0,0,0,2.7000000000000002,0,0,0,0,0,0,0,0,0,6,3.5,0,0,0,0,0,0,2.7000000000000002,0,0,3.2999999999999998,5.2000000000000002,0,4.7000000000000002,2.7999999999999998,5.7000000000000002,3.3999999999999999,0,0,0,0,6.5999999999999996,0,0,0,2.8999999999999999,2.6000000000000001,0,0,0,0,0,0,0,2.5,3.2000000000000002,0,0,0,3.2000000000000002,0,3.2999999999999998,0,0,0];
-    const markerSize = originalMarkerSize.map(el => (el + 1.0) * (el + 1.0) / 10);
+    const markerSize = originalMarkerSize.map(el => ((el + 1.0) * (el + 1.0) / 10) + 1.0);
+    const textColor = '#eaeaea';
+    const markerColor = '#ff5959';
     return {
       data: [
         {
@@ -21,15 +23,22 @@ export default {
           mode: "markers",
           type: "scatter3d",
           marker: {
-            color: "#C66246",
+            color: markerColor,
+            line: {
+              width: 0
+            },
             size: markerSize
           }
         }
       ],
       layout: {
         autosize: true,
+        font: {
+          color: textColor
+        },
         width: 1024,
         height: 700,
+        paper_bgcolor: '#282520',
         scene: {
           aspectratio: {
             x: this.xMax - this.xMin,
@@ -43,9 +52,9 @@ export default {
               z: 0
             },
             eye: {
-              x: this.xMax,
-              y: this.yMax,
-              z: this.zMax
+              x: 13.12,
+              y: -32.88,
+              z: 18.42
             },
             up: {
               x: 0,
@@ -54,19 +63,23 @@ export default {
             }
           },
           xaxis: {
+            color: textColor,
             type: "linear",
             zeroline: false
           },
           yaxis: {
+            color: textColor,
             type: "linear",
             zeroline: false
           },
           zaxis: {
+            autorange: "reversed",
+            color: textColor,
             type: "linear",
             zeroline: false
           }
         },
-        title: "3d point clustering"
+        title: "Earthquake Source Distribution"
       }
     };
   },
