@@ -15,7 +15,9 @@ export default {
     maxDate: {
       get() {
         let tmpDatetime = new Date(this.minDate);
-        tmpDatetime.setMilliseconds(tmpDatetime.getMilliseconds() + this.dateSpan);
+        tmpDatetime.setMilliseconds(
+          tmpDatetime.getMilliseconds() + this.dateSpan
+        );
         return tmpDatetime;
       }
     }
@@ -658,13 +660,13 @@ export default {
         },
         title: "Earthquake Source Distribution"
       },
-      minDate: new Date('2011-03-11 14:00:00'),
-      dateSpan: 1 * 60 * 60 * 1000  // milliseconds
+      minDate: new Date("2011-03-11 14:00:00"),
+      dateSpan: 1 * 60 * 60 * 1000 // milliseconds
     };
   },
   methods: {
     onUpdateButtonClick() {
-      this.minDate = new Date('2011-03-12 14:00:00');
+      this.minDate = new Date("2011-03-12 14:00:00");
       this.updateChart();
     },
     datetimeToString(dt) {
