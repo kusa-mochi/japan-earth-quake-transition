@@ -1,7 +1,7 @@
 <template>
   <div id="earthquake-chart">
     <plotly :data="data" :layout="layout" :display-mode-bar="false"></plotly>
-    <button @click="updateChart">update</button>
+    <el-button @click="onUpdateButtonClick">update</el-button>
   </div>
 </template>
 
@@ -11,6 +11,15 @@ import axios from "axios";
 
 export default {
   name: "EarthquakeChart",
+  computed: {
+    maxDate: {
+      get() {
+        let tmpDatetime = new Date(this.minDate);
+        tmpDatetime.setMilliseconds(tmpDatetime.getMilliseconds() + this.dateSpan);
+        return tmpDatetime;
+      }
+    }
+  },
   data() {
     const originalMarkerSize = [
       2.2999999999999998,
@@ -648,18 +657,33 @@ export default {
           }
         },
         title: "Earthquake Source Distribution"
-      }
+      },
+      minDate: new Date('2011-03-11 14:00:00'),
+      dateSpan: 1 * 60 * 60 * 1000  // milliseconds
     };
   },
   methods: {
+    onUpdateButtonClick() {
+      this.minDate = new Date('2011-03-12 14:00:00');
+      this.updateChart();
+    },
+    datetimeToString(dt) {
+      const year = dt.getFullYear();
+      const month = this.zeroPadding(dt.getMonth() + 1, 2);
+      const date = this.zeroPadding(dt.getDate(), 2);
+      const hours = this.zeroPadding(dt.getHours(), 2);
+      const minutes = this.zeroPadding(dt.getMinutes(), 2);
+      const seconds = this.zeroPadding(dt.getSeconds(), 2);
+      return `${year}-${month}-${date} ${hours}:${minutes}:${seconds}`;
+    },
     updateChart() {
       axios
         .get(
           "https://slash-mochi.net/earthquake-data-manager/get-earthquake-data.php",
           {
             params: {
-              min_date: "2011-03-12 14:00:00",
-              max_date: "2011-03-12 15:00:00"
+              min_date: this.datetimeToString(this.minDate),
+              max_date: this.datetimeToString(this.maxDate)
             }
           }
         )
@@ -671,6 +695,9 @@ export default {
             el => ((el + 1.0) * (el + 1.0)) / 10 + 1.0
           );
         });
+    },
+    zeroPadding(num, digits) {
+      return `0${num}`.slice(-digits);
     }
   },
   props: {
