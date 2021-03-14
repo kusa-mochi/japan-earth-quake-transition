@@ -2,6 +2,13 @@
   <div id="earthquake-chart">
     <plotly :data="data" :layout="layout" :display-mode-bar="false"></plotly>
     <el-button @click="onUpdateButtonClick">update</el-button>
+    <input
+      type="range"
+      @change="onChangeSliderValue"
+      :value="minDateSerialNumber"
+      :min="sliderMin"
+      :max="sliderMax"
+    />
   </div>
 </template>
 
@@ -12,13 +19,30 @@ import axios from "axios";
 export default {
   name: "EarthquakeChart",
   computed: {
-    maxDate: {
+    minDateSerialNumber: {
+      cache: false,
       get() {
-        let tmpDatetime = new Date(this.minDate);
-        tmpDatetime.setMilliseconds(
-          tmpDatetime.getMilliseconds() + this.dateSpan
-        );
-        return tmpDatetime;
+        return this.minDate.getTime();
+      },
+      set(newValue) {
+        this.minDate.setTime(newValue);
+        this.updateChart();
+      }
+    },
+    maxDate: {
+      cache: false,
+      get() {
+        return new Date(this.minDate.getTime() + this.dateSpan);
+      }
+    },
+    sliderMin: {
+      get() {
+        return new Date(2011, 1, 1, 0, 0, 0).getTime();
+      }
+    },
+    sliderMax: {
+      get() {
+        return new Date(2011, 3, 1, 0, 0, 0).getTime();
       }
     }
   },
@@ -660,13 +684,16 @@ export default {
         },
         title: "Earthquake Source Distribution"
       },
-      minDate: new Date("2011-03-11 14:00:00"),
+      minDate: new Date(2011, 2, 1, 0, 0, 0),
       dateSpan: 1 * 60 * 60 * 1000 // milliseconds
     };
   },
   methods: {
+    onChangeSliderValue(newValue) {
+      this.minDateSerialNumber = newValue.currentTarget.value;
+    },
     onUpdateButtonClick() {
-      this.minDate = new Date("2011-03-12 14:00:00");
+      this.minDate = new Date(2011, 2, 12, 14, 0, 0);
       this.updateChart();
     },
     datetimeToString(dt) {
@@ -701,6 +728,9 @@ export default {
     zeroPadding(num, digits) {
       return `0${num}`.slice(-digits);
     }
+  },
+  mounted() {
+    this.minDate = new Date(2011, 2, 11, 14, 0, 0);
   },
   props: {
     markerColor: {
