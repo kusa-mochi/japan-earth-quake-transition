@@ -1,7 +1,6 @@
 <template>
   <div id="earthquake-chart">
     <plotly :data="data" :layout="layout" :display-mode-bar="false"></plotly>
-    <el-button @click="onUpdateButtonClick">update</el-button>
     <input
       type="range"
       @change="onChangeSliderValue"
