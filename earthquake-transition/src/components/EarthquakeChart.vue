@@ -26,24 +26,24 @@ export default {
       set(newValue) {
         this.minDate.setTime(newValue);
         this.updateChart();
-      }
+      },
     },
     maxDate: {
       cache: false,
       get() {
         return new Date(this.minDate.getTime() + this.dateSpan);
-      }
+      },
     },
     sliderMin: {
       get() {
         return new Date(2011, 1, 1, 0, 0, 0).getTime();
-      }
+      },
     },
     sliderMax: {
       get() {
         return new Date(2011, 3, 1, 0, 0, 0).getTime();
-      }
-    }
+      },
+    },
   },
   data() {
     const textColor = "#eaeaea";
@@ -59,16 +59,16 @@ export default {
           marker: {
             color: markerColor,
             line: {
-              width: 0
+              width: 0,
             },
-            size: []
-          }
-        }
+            size: [],
+          },
+        },
       ],
       layout: {
         autosize: true,
         font: {
-          color: textColor
+          color: textColor,
         },
         width: 1024,
         height: 700,
@@ -77,46 +77,46 @@ export default {
           aspectratio: {
             x: this.xMax - this.xMin,
             y: this.yMax - this.yMin,
-            z: (this.zMax - this.zMin) / 100
+            z: (this.zMax - this.zMin) / 100,
           },
           camera: {
             center: {
               x: 0,
               y: 0,
-              z: 0
+              z: 0,
             },
             eye: {
               x: 13.12,
               y: -32.88,
-              z: 18.42
+              z: 18.42,
             },
             up: {
               x: 0,
               y: 0,
-              z: 1
-            }
+              z: 1,
+            },
           },
           xaxis: {
             color: textColor,
             type: "linear",
-            zeroline: false
+            zeroline: false,
           },
           yaxis: {
             color: textColor,
             type: "linear",
-            zeroline: false
+            zeroline: false,
           },
           zaxis: {
             autorange: "reversed",
             color: textColor,
             type: "linear",
-            zeroline: false
-          }
+            zeroline: false,
+          },
         },
-        title: "Earthquake Source Distribution（震源の分布）"
+        title: "Earthquake Source Distribution（震源の分布）",
       },
       minDate: new Date(2011, 2, 1, 0, 0, 0),
-      dateSpan: 1 * 60 * 60 * 1000 // milliseconds
+      dateSpan: 1 * 60 * 60 * 1000, // milliseconds
     };
   },
   methods: {
@@ -143,22 +143,22 @@ export default {
           {
             params: {
               min_date: this.datetimeToString(this.minDate),
-              max_date: this.datetimeToString(this.maxDate)
-            }
+              max_date: this.datetimeToString(this.maxDate),
+            },
           }
         )
-        .then(res => {
+        .then((res) => {
           this.data[0].x = res.data.longitude;
           this.data[0].y = res.data.latitude;
           this.data[0].z = res.data.depth;
           this.data[0].marker.size = res.data.magnitude.map(
-            el => ((el + 1.0) * (el + 1.0)) / 10 + 1.0
+            (el) => ((el + 1.0) * (el + 1.0)) / 10 + 1.0
           );
         });
     },
     zeroPadding(num, digits) {
       return `0${num}`.slice(-digits);
-    }
+    },
   },
   mounted() {
     this.updateChart();
@@ -167,47 +167,47 @@ export default {
     markerColor: {
       default: "#169632",
       required: false,
-      type: String
+      type: String,
     },
     chartData: {
       default: () => [],
       required: true,
-      type: Array
+      type: Array,
     },
     xMin: {
       default: 0.0,
       required: false,
-      type: Number
+      type: Number,
     },
     xMax: {
       default: 1.0,
       required: false,
-      type: Number
+      type: Number,
     },
     yMin: {
       default: 0.0,
       required: false,
-      type: Number
+      type: Number,
     },
     yMax: {
       default: 1.0,
       required: false,
-      type: Number
+      type: Number,
     },
     zMin: {
       default: 0.0,
       required: false,
-      type: Number
+      type: Number,
     },
     zMax: {
       default: 1.0,
       required: false,
-      type: Number
-    }
+      type: Number,
+    },
   },
   components: {
-    Plotly
-  }
+    Plotly,
+  },
 };
 </script>
 
