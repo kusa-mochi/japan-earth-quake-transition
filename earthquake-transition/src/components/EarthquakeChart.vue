@@ -114,6 +114,15 @@ export default {
           },
         },
         title: "Earthquake Source Distribution（震源の分布）",
+        xaxis: {
+          range: [this.xMin, this.xMax],
+        },
+        yaxis: {
+          range: [this.yMin, this.yMax],
+        },
+        zaxis: {
+          range: [this.zMin, this.zMax],
+        },
       },
       minDate: new Date(2011, 2, 1, 0, 0, 0),
       dateSpan: 1 * 60 * 60 * 1000, // milliseconds
