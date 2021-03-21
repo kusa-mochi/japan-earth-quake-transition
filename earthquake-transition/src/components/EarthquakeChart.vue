@@ -47,7 +47,6 @@ export default {
   },
   data() {
     const textColor = "#eaeaea";
-    const markerColor = "#ff5959";
     return {
       data: [
         {
@@ -57,7 +56,7 @@ export default {
           mode: "markers",
           type: "scatter3d",
           marker: {
-            color: markerColor,
+            color: this.markerColor,
             line: {
               width: 0,
             },
@@ -177,11 +176,6 @@ export default {
       default: "#169632",
       required: false,
       type: String,
-    },
-    chartData: {
-      default: () => [],
-      required: true,
-      type: Array,
     },
     xMin: {
       default: 0.0,
