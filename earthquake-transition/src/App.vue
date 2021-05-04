@@ -24,7 +24,7 @@ export default {
       northEnd: 45.557778,
       southEnd: 20.425183,
       westEnd: 122.9325,
-      maxDepth: -720.0,
+      maxDepth: 720.0,
       chartColor: "#ff5959",
     };
   },
