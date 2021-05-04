@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    App
     <earthquake-chart
       :marker-color="chartColor"
       :x-min="westEnd"
