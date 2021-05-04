@@ -1,6 +1,6 @@
 <template>
   <div id="earthquake-chart">
-    <plotly :data="data" :layout="layout" :display-mode-bar="false"></plotly>
+    <plotly :data="data" :layout="layout" :display-mode-bar="true"></plotly>
     <input
       type="range"
       @change="onChangeSliderValue"
@@ -63,9 +63,17 @@ export default {
             size: [],
           },
         },
+        {
+          alphahull: 7,
+          opacity: 0.3,
+          type: 'mesh3d',
+          x: [this.xMin, this.xMax, this.xMax, this.xMin],
+          y: [this.yMin, this.yMin, this.yMax, this.yMax],
+          z: [-1, -1, -1, -1]
+        }
       ],
       layout: {
-        autosize: true,
+        autosize: false,
         font: {
           color: textColor,
         },
@@ -73,10 +81,11 @@ export default {
         height: 700,
         paper_bgcolor: "#282520",
         scene: {
+          aspectmode: "manual",
           aspectratio: {
-            x: this.xMax - this.xMin,
-            y: this.yMax - this.yMin,
-            z: (this.zMax - this.zMin) / 100,
+            x: 1,
+            y: 1,
+            z: 1,
           },
           camera: {
             center: {
@@ -85,9 +94,9 @@ export default {
               z: 0,
             },
             eye: {
-              x: 13.12,
-              y: -32.88,
-              z: 18.42,
+              x: 0.7722545049825484,
+              y: -1.9353451313891932,
+              z: 1.084217071781902,
             },
             up: {
               x: 0,
@@ -97,29 +106,37 @@ export default {
           },
           xaxis: {
             color: textColor,
+            range: [this.xMin, this.xMax],
+            rangemode: "normal",
             type: "linear",
             zeroline: false,
           },
           yaxis: {
             color: textColor,
+            range: [this.yMin, this.yMax],
+            rangemode: "normal",
             type: "linear",
             zeroline: false,
           },
           zaxis: {
-            autorange: "reversed",
             color: textColor,
+            range: [this.zMin, this.zMax],
+            rangemode: "normal",
             type: "linear",
             zeroline: false,
           },
         },
         title: "Earthquake Source Distribution（震源の分布）",
         xaxis: {
+          fixedrange: true,
           range: [this.xMin, this.xMax],
         },
         yaxis: {
+          fixedrange: true,
           range: [this.yMin, this.yMax],
         },
         zaxis: {
+          fixedrange: true,
           range: [this.zMin, this.zMax],
         },
       },
